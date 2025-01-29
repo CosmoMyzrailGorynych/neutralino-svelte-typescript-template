@@ -1,0 +1,50 @@
+{
+  "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
+  "applicationId": "js.neutralino.sample",
+  "version": "1.0.0",
+  "defaultMode": "window",
+  "port": 0,
+  "documentRoot": "/app/",
+  "url": "/",
+  "enableServer": true,
+  "enableNativeAPI": true,
+  "tokenSecurity": "one-time",
+  "exportAuthInfo": false,
+  "logging": {
+    "enabled": true,
+    "writeToLogFile": true
+  },
+  "nativeAllowList": [
+    "app.*",
+    "os.*",
+    "debug.log",
+    "computer.*"
+  ],
+  "modes": {
+    "window": {
+      "title": "Neutralino.js Svelte-TypeScript Template",
+      "icon": "/app/icon.png",
+      "width": 800,
+      "height": 800,
+      "minWidth": 400,
+      "minHeight": 200,
+      "center": true,
+      "fullScreen": false,
+      "alwaysOnTop": false,
+      "enableInspector": false,
+      "borderless": false,
+      "maximize": false,
+      "hidden": false,
+      "resizable": true,
+      "exitProcessOnClose": true,
+      "injectGlobals": true
+    }
+  },
+  "cli": {
+    "binaryName": "neutralino-svelte-typescript-template",
+    "resourcesPath": "/app/",
+    "extensionsPath": "/extensions/",
+    "binaryVersion": "5.5.0",
+    "clientVersion": "5.5.0"
+  }
+}
