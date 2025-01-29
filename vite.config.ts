@@ -9,17 +9,23 @@ const neuResourcesRoot = '.' + neuConfig.cli.resourcesPath;
 
 let launchedNeutralino = false;
 
+/** Vite plugin to run Neutralino and build it when needed */
 const neutralino = (): PluginOption => [{
     name: 'vite-plugin-neutralino:copy-icon',
     enforce: 'post',
     async buildStart() {
-        await fs.copyFile('buildAssets/icon.png', path.join(neuResourcesRoot + '/icon.png'));
+        // Copy the app icon when developing an app
+        await fs.mkdir('./app', {
+            recursive: true
+        })
+        await fs.copyFile('public/icon.png', path.join(neuResourcesRoot + '/icon.png'));
     }
 }, {
     name: 'vite-plugin-neutralino:serve',
     apply: 'serve',
     enforce: 'post',
     async configureServer(server) {
+        // Start Neutralino when the Vite server starts and use Vite server
         server.httpServer?.once('listening', async () => {
             if (launchedNeutralino) {
                 return;
@@ -40,6 +46,7 @@ const neutralino = (): PluginOption => [{
     apply: 'build',
     enforce: 'post',
     async closeBundle() {
+        // Build Neutralino after Vite builds
         await $`neu build`;
         console.log(`✓ Neutralino build completed. Build artifacts are located in "${path.resolve(path.join('./dist', neuConfig.cli.binaryName))}" folder.`);
     },
